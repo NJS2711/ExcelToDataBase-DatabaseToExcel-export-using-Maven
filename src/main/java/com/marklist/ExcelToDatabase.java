@@ -9,7 +9,7 @@ import org.apache.poi.xssf.usermodel.*;
 
 public class ExcelToDatabase {
 
-	public static Properties loadPropertiesFile() throws Exception {
+	public static Properties loadPropertiesFile() throws IOException {
 
 		Properties prop = new Properties();
 		InputStream in = new FileInputStream("jdbc1.properties");
@@ -19,7 +19,7 @@ public class ExcelToDatabase {
 	}
 
 	public void exportToDB() {
-		Connection connection = null;
+		Connection connection;
 
 		try {
 
@@ -31,13 +31,12 @@ public class ExcelToDatabase {
 			String password = prop.getProperty("password");
 
 			Class.forName(driverClass);
-			String excelFilePath = "C:\\Users\\nicky\\eclipse-workspace\\Marklist_Export_&_mailing\\Mark_list.xlsx";
+			String excelpth = "C:\\Users\\nicky\\eclipse-workspace\\Marklist_Export_&_mailing\\Mark_list.xlsx";
 
-			int batchSize = 15;
 
 			long start = System.currentTimeMillis();
 
-			FileInputStream inputStream = new FileInputStream(excelFilePath);
+			FileInputStream inputStream = new FileInputStream(excelpth);
 
 			Workbook workbook = new XSSFWorkbook(inputStream);
 
@@ -49,9 +48,6 @@ public class ExcelToDatabase {
 
 			String sql = "INSERT INTO mark_list (Name, Division, Marks, Grade, GradePt) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
-
-			int count = 0;
-
 			rowIterator.next();
 
 			while (rowIterator.hasNext()) {
@@ -92,9 +88,9 @@ public class ExcelToDatabase {
 
 				statement.addBatch();
 
-				if (count % batchSize == 0) {
+			
 					statement.executeBatch();
-				}
+				
 
 			}
 

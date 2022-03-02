@@ -32,6 +32,7 @@ public class ExportMarkLists {
 		new ExportMarkLists().export();
 		new ExportPassedList().export1();
 		new ExportFailedList().export2();
+		
 
 	}
 
@@ -65,7 +66,7 @@ public class ExportMarkLists {
 
 			writeHeaderLine(sheet);
 
-			writeDataLines(result, workbook, sheet);
+			writeDataLines(result, sheet);
 
 			FileOutputStream outputStream = new FileOutputStream(excelFilePath);
 			workbook.write(outputStream);
@@ -101,7 +102,7 @@ public class ExportMarkLists {
 		headerCell.setCellValue("GradePt");
 	}
 
-	private void writeDataLines(ResultSet result, XSSFWorkbook workbook, XSSFSheet sheet) throws SQLException {
+	private void writeDataLines(ResultSet result, XSSFSheet sheet) throws SQLException {
 		int rowCount = 1;
 
 		while (result.next()) {

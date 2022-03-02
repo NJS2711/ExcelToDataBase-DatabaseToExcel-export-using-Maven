@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExportFailedList {
 
-	public static Properties loadPropertiesFile() throws Exception {
+	public static Properties loadPropertiesFile() throws IOException {
 
 		Properties prop = new Properties();
 		InputStream in = new FileInputStream("jdbc.properties");
@@ -55,7 +55,7 @@ public class ExportFailedList {
 
 			writeHeaderLine(sheet);
 
-			writeDataLines(result, workbook, sheet);
+			writeDataLines(result, sheet);
 
 			FileOutputStream outputStream = new FileOutputStream(excelFilePath);
 			workbook.write(outputStream);
@@ -91,7 +91,7 @@ public class ExportFailedList {
 		headerCell.setCellValue("GradePt");
 	}
 
-	private void writeDataLines(ResultSet result, XSSFWorkbook workbook, XSSFSheet sheet) throws SQLException {
+	private void writeDataLines(ResultSet result, XSSFSheet sheet) throws SQLException {
 		int rowCount = 1;
 
 		while (result.next()) {

@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendMail {
 
-	public void send() {
+	public void send() throws IOException {
 
 		String to = "shanil.ts@m.ecsfin.com";
 
@@ -36,7 +36,7 @@ public class SendMail {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication("********@gmail.com", "********");
+				return new PasswordAuthentication("nickyjacobsam@gmail.com", "**********");
 
 			}
 
@@ -60,26 +60,23 @@ public class SendMail {
 
 			MimeBodyPart textPart = new MimeBodyPart();
 
-			try {
+			
+				String f1 = "C:\\Users\\nicky\\eclipse-workspace\\com.njs.markList\\Mark_list.xlsx";
+				String f2 = "C:\\Users\\nicky\\eclipse-workspace\\com.njs.markList\\passed_students_list.xlsx";
+				String f3 = "C:\\Users\\nicky\\eclipse-workspace\\com.njs.markList\\failed_students_list.xlsx";
 
-				File f = new File("C:\\Users\\nicky\\eclipse-workspace\\com.njs.markList\\Mark_list.xlsx");
-				File f1 = new File("C:\\Users\\nicky\\eclipse-workspace\\com.njs.markList\\passed_students_list.xlsx");
-				File f2 = new File("C:\\Users\\nicky\\eclipse-workspace\\com.njs.markList\\failed_students_list.xlsx");
+				File filel = new File(f1);
+				File file2 = new File(f2);
+				File file3 = new File(f3);
 
-				attachmentPart.attachFile(f);
-				attachmentPart2.attachFile(f1);
-				attachmentPart3.attachFile(f2);
+				attachmentPart.attachFile(filel);
+				attachmentPart2.attachFile(file2);
+				attachmentPart3.attachFile(file3);
 				textPart.setText("Pass percentage of division A: 100% \n Pass percentage of division B: 37.5%");
 				multipart.addBodyPart(textPart);
 				multipart.addBodyPart(attachmentPart);
 				multipart.addBodyPart(attachmentPart2);
 				multipart.addBodyPart(attachmentPart3);
-
-			} catch (IOException e) {
-
-				e.printStackTrace();
-
-			}
 
 			message.setContent(multipart);
 
