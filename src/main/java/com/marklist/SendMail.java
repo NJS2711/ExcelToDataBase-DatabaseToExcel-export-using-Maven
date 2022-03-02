@@ -19,7 +19,7 @@ public class SendMail {
 
 	public void send() throws IOException {
 
-		String to = "shanil.ts@m.ecsfin.com";
+		String to = "******@gmail.com";
 
 		String from = "nickyjacobsam@gmail.com";
 
