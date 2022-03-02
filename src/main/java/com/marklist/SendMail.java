@@ -36,7 +36,7 @@ public class SendMail {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication("nickyjacobsam@gmail.com", "********");
+				return new PasswordAuthentication("********@gmail.com", "********");
 
 			}
 
